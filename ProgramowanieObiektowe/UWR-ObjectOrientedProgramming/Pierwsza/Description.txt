@@ -1,0 +1,1 @@
+We had to create BST(zadanie4) and module of complex numbers(zadanie3). We couldn't use classes, just structural programming! 

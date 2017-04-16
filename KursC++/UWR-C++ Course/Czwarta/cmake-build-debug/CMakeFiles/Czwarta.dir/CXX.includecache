@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yoga/Dokumenty/C++/Czwarta/Wielomian.h
+iostream
+-
+
+/home/yoga/Dokumenty/C++/Czwarta/main.cpp
+Wielomian.h
+/home/yoga/Dokumenty/C++/Czwarta/Wielomian.h
+iostream
+-
+
+/home/yoga/Dokumenty/C++/Czwarta/source.cpp
+iostream
+-
+string
+-
+Wielomian.h
+/home/yoga/Dokumenty/C++/Czwarta/Wielomian.h
+

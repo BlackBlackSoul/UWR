@@ -1,0 +1,5 @@
+/home/yoga/Dokumenty/Obiektowe/Trzecia/Macierze/Macierze/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/yoga/Dokumenty/Obiektowe/Trzecia/Macierze/Macierze/bin/Debug/Macierze.exe.mdb
+/home/yoga/Dokumenty/Obiektowe/Trzecia/Macierze/Macierze/bin/Debug/Macierze.exe
+/home/yoga/Dokumenty/Obiektowe/Trzecia/Macierze/Macierze/obj/x86/Debug/Macierze.exe
+/home/yoga/Dokumenty/Obiektowe/Trzecia/Macierze/Macierze/obj/x86/Debug/Macierze.exe.mdb

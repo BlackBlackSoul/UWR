@@ -1,0 +1,42 @@
+ZADANIE 6:
+ 1. G = <E,V,S,P>
+
+    E = {0,1}
+    V = {Z,J}
+    S = Z
+    P = {Z -> 0Z0, Z -> J, Z -> e, J -> J1, J -> e}
+
+2. G = <E,V,S,P>
+
+    E = {0,1}
+    V = {S,T}
+    S = S
+    P = { S -> S0, S -> T0, S -> e, T -> 0T1, T -> e }
+
+3. G = <E,V,S,P>
+
+    E = {0,1}
+    V = {S,T}
+    S = S
+    P = { S -> S0, S -> T, S -> e, T -> T1, T -> 0T1, T -> e}
+
+4. G = <E,V,S,P>
+    
+    E = {0,1}
+    V = {S}
+    S = S
+    P = {S -> 01S00, S -> e}
+
+5. G = <E,V,S,P>
+    
+    E = {0,1}
+    V = {S}
+    S = S
+    P = { S -> 0S1, S -> 1S0, S -> SS , S -> e }
+
+6. G = <E,V,S,P>
+
+    E = {0,1}
+    V = {S}
+    S = S
+    P = {S -> 1S0S0. S -> 0S1S0. S -> 0S0S1, S -> e }

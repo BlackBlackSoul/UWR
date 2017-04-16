@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yoga/Dokumenty/C++/Piata/DoubleLinkedListh.h
+iostream
+-
+algorithm
+-
+
+/home/yoga/Dokumenty/C++/Piata/DoubleLinkedListsource.cpp
+iostream
+-
+DoubleLinkedListh.h
+/home/yoga/Dokumenty/C++/Piata/DoubleLinkedListh.h
+
+/home/yoga/Dokumenty/C++/Piata/main.cpp
+iostream
+-
+vector
+-
+DoubleLinkedListh.h
+/home/yoga/Dokumenty/C++/Piata/DoubleLinkedListh.h
+
