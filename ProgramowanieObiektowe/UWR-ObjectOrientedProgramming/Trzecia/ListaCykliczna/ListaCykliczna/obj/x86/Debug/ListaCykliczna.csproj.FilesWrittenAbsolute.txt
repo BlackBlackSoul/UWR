@@ -1,5 +1,0 @@
-/home/yoga/Dokumenty/Obiektowe/Trzecia/ListaCykliczna/ListaCykliczna/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/home/yoga/Dokumenty/Obiektowe/Trzecia/ListaCykliczna/ListaCykliczna/bin/Debug/ListaCykliczna.exe.mdb
-/home/yoga/Dokumenty/Obiektowe/Trzecia/ListaCykliczna/ListaCykliczna/bin/Debug/ListaCykliczna.exe
-/home/yoga/Dokumenty/Obiektowe/Trzecia/ListaCykliczna/ListaCykliczna/obj/x86/Debug/ListaCykliczna.exe
-/home/yoga/Dokumenty/Obiektowe/Trzecia/ListaCykliczna/ListaCykliczna/obj/x86/Debug/ListaCykliczna.exe.mdb

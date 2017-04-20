@@ -1,6 +1,0 @@
-D:\OBIEKTOWE\ConsoleApplication3\ConsoleApplication3\bin\Debug\ConsoleApplication3.exe.config
-D:\OBIEKTOWE\ConsoleApplication3\ConsoleApplication3\bin\Debug\ConsoleApplication3.exe
-D:\OBIEKTOWE\ConsoleApplication3\ConsoleApplication3\bin\Debug\ConsoleApplication3.pdb
-D:\OBIEKTOWE\ConsoleApplication3\ConsoleApplication3\obj\Debug\ConsoleApplication3.csprojResolveAssemblyReference.cache
-D:\OBIEKTOWE\ConsoleApplication3\ConsoleApplication3\obj\Debug\ConsoleApplication3.exe
-D:\OBIEKTOWE\ConsoleApplication3\ConsoleApplication3\obj\Debug\ConsoleApplication3.pdb
