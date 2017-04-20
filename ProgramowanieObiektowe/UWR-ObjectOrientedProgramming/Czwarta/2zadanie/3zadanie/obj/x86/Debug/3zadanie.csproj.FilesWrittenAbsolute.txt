@@ -1,0 +1,5 @@
+/home/yoga/Dokumenty/Obiektowe/Czwarta/3zadanie/3zadanie/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/yoga/Dokumenty/Obiektowe/Czwarta/3zadanie/3zadanie/bin/Debug/3zadanie.exe.mdb
+/home/yoga/Dokumenty/Obiektowe/Czwarta/3zadanie/3zadanie/bin/Debug/3zadanie.exe
+/home/yoga/Dokumenty/Obiektowe/Czwarta/3zadanie/3zadanie/obj/x86/Debug/3zadanie.exe
+/home/yoga/Dokumenty/Obiektowe/Czwarta/3zadanie/3zadanie/obj/x86/Debug/3zadanie.exe.mdb
