@@ -1,250 +1,150 @@
-#include "LiczbyWymierne.h"
 
 #include <iostream>
 #include <string>
-#include <cmath>
-#include <vector>
-#include <limits.h>
+#include "LiczbyWymierne.h"
+
 using namespace std;
 
-
-LiczbyWymierne::LiczbyWymierne() {
-    setLicznik(0);
-    setMianownik(1);
-}
-
-LiczbyWymierne::LiczbyWymierne(double x) {
-    int i = 1;
-    while (x*i-static_cast<int>(x*i) != 0) {
-        if (i > INT_MAX/10) {
-            cout << "this frational number : " << x << " can not be transfer to rational number, it's too long, now set it 0." << endl;
-            setLicznik(0);
-            setMianownik(1);
-            return ;
-        }
-        else {
-            i *= 10;
-        }
-    }
-    setLicznik(x * i);
-    setMianownik(i);
-    uproszczenieLiczbyRzeczywistej();
-}
-
-LiczbyWymierne::LiczbyWymierne(int licznik, int mianownik) {
-    setLicznik(licznik);
-    setMianownik(mianownik);
-    uproszczenieLiczbyRzeczywistej();
-}
-
-int wartoscAbsolutna(int x) {
-    if (x >= 0) {
-        return x;
-    }
-    else {
-        return -x;
-    }
-}
-
-void dzielnikiPierwsze(int num, vector<int> &factorSet) {
-    if (num != 1) {
-        factorSet.push_back(num);
-    }
-    for (int i = 2; i <= sqrt( static_cast<double>(num) ); i++) {
-        if (num%i == 0) {
-            factorSet.push_back(i);
-            factorSet.push_back(num/i);
-        }
-    }
-}
-
-void skrocenieDzielniki(int &a, int &b) {
-    int tempLicznik = a;
-    int tempMianownik = b;
-    int small, temp;
-    vector<int> zbiorDzielnikow;
-    if (tempLicznik == tempMianownik) {
-        a = 1;
-        b = 1;
-        return ;
-    }
-    else if (tempLicznik == -tempMianownik) {
-        a = -1;
-        b = 1;
-        return ;
-    }
-    else if (tempLicznik == 0) {
-        b = 1;
-        return ;
+liczbaWymierna::liczbaWymierna(int licz, int mian) {
+    if (mian == 0)
+        throw divisionByZero();
+    if (mian < 0) {
+        mian *= -1;
+        licz *= -1;
     }
 
-
-    if (wartoscAbsolutna(tempLicznik) < wartoscAbsolutna(tempMianownik)) {
-        small = wartoscAbsolutna(tempLicznik);
+    if (licz != 0) {
+        int dzielnik;
+        dzielnik = nwd((abs(licz)),mian);
+        licz /= dzielnik;
+        mian /= dzielnik;
     }
-    else {
-        small = wartoscAbsolutna(tempMianownik);
-    }
-
-    dzielnikiPierwsze(small, zbiorDzielnikow);
-    for (int i = 0; i < zbiorDzielnikow.size(); i++) {
-        temp = zbiorDzielnikow[i];
-        while (tempLicznik%temp == 0 && tempMianownik%temp == 0) {
-            tempLicznik /= temp;
-            tempMianownik /= temp;
-        }
-    }
-    a = tempLicznik;
-    b = tempMianownik;
+    numerator = licz;
+    denumerator = mian;
 }
 
+liczbaWymierna::liczbaWymierna(int licz) : liczbaWymierna(licz, 1) { }
 
-void LiczbyWymierne::setLicznik(int tempLicznik) {
-    licznik = tempLicznik;
+
+liczbaWymierna::liczbaWymierna(const liczbaWymierna &obj) {
+    numerator = obj.getNumerator();
+    denumerator = obj.getDenumerator();
 }
 
-int LiczbyWymierne::getLicznik() const {
-    return licznik;
-}
-
-void LiczbyWymierne::setMianownik(int tempMianownik) {
-    if (tempMianownik == 0) {
-        mianownik = 1;
-        licznik = 0;
-        cout << "Denominator is 0! Not good! THe whole is set to 0." << endl;
-    }
-    else {
-        mianownik = tempMianownik;
-    }
-}
-
-int LiczbyWymierne::getMianownik() const {
-    return mianownik;
-}
-
-
-void LiczbyWymierne::uproszczenieLiczbyRzeczywistej() {
-    int tempN = licznik;
-    int tempD = mianownik;
-    skrocenieDzielniki(tempN, tempD);
-    setLicznik(tempN);
-    setMianownik(tempD);
-}
-
-
-//friend functions definitions
-
-LiczbyWymierne operator+(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    LiczbyWymierne temp;
-    int tempLewyMianownik = left.getMianownik();
-    int tempPrawyMianownik = right.getMianownik();
-    skrocenieDzielniki(tempLewyMianownik, tempPrawyMianownik);
-    temp.setMianownik(left.getMianownik() * tempPrawyMianownik);
-    temp.setLicznik(left.getLicznik() * tempPrawyMianownik + right.getLicznik() * tempLewyMianownik);
-    temp.uproszczenieLiczbyRzeczywistej();
-    return temp;
-}
-
-LiczbyWymierne operator-(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    return left+(-right);
-}
-
-LiczbyWymierne operator*(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    LiczbyWymierne temp;
-    LiczbyWymierne temp2(right.getLicznik(), left.getMianownik());
-    LiczbyWymierne temp3(left.getLicznik(), right.getMianownik());
-    int a = temp2.getMianownik();
-    int b = temp2.getLicznik();
-    int c = temp3.getMianownik();
-    int d = temp3.getLicznik();
-    temp.setLicznik(b * d);
-    temp.setMianownik(a * c);
-    return temp;
-}
-
-LiczbyWymierne operator/(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    LiczbyWymierne temp_1(left.getLicznik(), left.getMianownik());
-    LiczbyWymierne temp_2(right.getMianownik(), right.getLicznik());
-    return temp_1*temp_2;
-}
-
-bool operator==(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    return (left.licznik == right.licznik && left.mianownik == right.mianownik);
-}
-
-bool operator!=(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    return !(left == right);
-}
-
-bool operator<(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    int lside = left.getLicznik()* right.getMianownik();
-    int rside = left.getMianownik()* right.getLicznik();
-    return (lside < rside);
-}
-
-bool operator>(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    int lside = left.getLicznik()* right.getMianownik();
-    int rside = left.getMianownik()* right.getLicznik();
-    return (lside > rside);
-}
-
-bool operator<=(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    return ( (left < right) || (left == right) );
-}
-
-bool operator>=(const LiczbyWymierne& left, const LiczbyWymierne& right) {
-    return ( (left > right) || (left == right) );
-}
-
-ostream& operator<<(ostream& out, const LiczbyWymierne& obj) {
-    out << obj.licznik;
-    if (obj.licznik != 0 && obj.mianownik != 1) {
-        out << "/" << obj.mianownik;
-    }
-    return out;
-}
-
-LiczbyWymierne& LiczbyWymierne::operator=(const LiczbyWymierne& obj) {
-    setLicznik(obj.getLicznik());
-    setMianownik(obj.getMianownik());
+liczbaWymierna& liczbaWymierna::operator=(const liczbaWymierna &obj) {
+    numerator = obj.getNumerator();
+    denumerator = obj.getDenumerator();
     return *this;
 }
 
-LiczbyWymierne& LiczbyWymierne::operator+=(const LiczbyWymierne& obj) {
-    *this = *this+obj;
-    return *this;
+int liczbaWymierna::getNumerator() const {
+    return numerator;
 }
 
-LiczbyWymierne& LiczbyWymierne::operator-=(const LiczbyWymierne& obj) {
-    *this = *this-obj;
-    return *this;
+int liczbaWymierna::getDenumerator() const {
+    return denumerator;
 }
 
-LiczbyWymierne& LiczbyWymierne::operator*=(const LiczbyWymierne& obj) {
-    *this = *this*obj;
-    return *this;
+liczbaWymierna operator-(const liczbaWymierna &obj) {
+    return liczbaWymierna(obj.numerator*(-1), obj.denumerator);
 }
 
-LiczbyWymierne& LiczbyWymierne::operator/=(const LiczbyWymierne& obj) {
-    *this = *this/obj;
-    return *this;
+liczbaWymierna operator!(const liczbaWymierna &obj) {
+    if (obj.numerator == 0) throw divisionByZero();
+    liczbaWymierna newWymierna(obj.denumerator, obj.numerator);
+    return newWymierna;
 }
 
-LiczbyWymierne operator-(const LiczbyWymierne &obj) {
-    LiczbyWymierne temp;
-    int tempLicznik = obj.getLicznik();
-    int tempMianownik = obj.getMianownik();
-    temp.setLicznik((-1)*tempLicznik);
-    temp.setMianownik(tempMianownik);
-    return temp;
+liczbaWymierna::operator int() {
+    return numerator / denumerator;
 }
 
-LiczbyWymierne operator!(const LiczbyWymierne &obj) {
-    LiczbyWymierne temp;
-    int tempMianownik = obj.getLicznik();
-    int tempLicznik = obj.getMianownik();
-    if(tempMianownik < 0) { tempMianownik = (-1)*tempMianownik; tempLicznik = (-1)*tempLicznik; }
-    temp.setLicznik(tempLicznik);
-    temp.setMianownik(tempMianownik);
-    return temp;
+
+liczbaWymierna::operator double() {
+    return static_cast<double>(numerator) / static_cast<double>(denumerator);
+}
+
+
+const liczbaWymierna operator+(const liczbaWymierna &objL, const liczbaWymierna &objR) {
+    int pom;
+    try {
+        pom = nww(objL.getDenumerator(), objR.getDenumerator());
+    }
+    catch (string war) {
+        throw war;
+    }
+    int denumL = pom/objL.getDenumerator();
+    int denumR = pom/objR.getDenumerator();
+    int n_licz = (objL.getDenumerator()* denumL) + (objR.getNumerator() * denumR);
+    return liczbaWymierna(n_licz, pom);
+}
+
+
+const liczbaWymierna operator-(const liczbaWymierna &objL, const liczbaWymierna &objR) {
+    int pom;
+    try {
+        pom = nww(objL.getDenumerator(), objR.getDenumerator());
+    }
+    catch (string war) {
+        throw war;
+    }
+
+    int denumL = pom/objL.getDenumerator();
+    int denumR = pom/objR.getDenumerator();
+    
+    int n_licz = (objL.getDenumerator() * denumL) - (objR.getNumerator() * denumR);
+    return liczbaWymierna(n_licz, pom);
+}
+
+
+const liczbaWymierna operator*(const liczbaWymierna &pierwsza, const liczbaWymierna &druga) {
+    return liczbaWymierna((pierwsza.getNumerator() * druga.getNumerator()), (pierwsza.getDenumerator()* druga.getDenumerator()));
+}
+
+const liczbaWymierna operator/(const liczbaWymierna &pierwsza, const liczbaWymierna &druga) {
+    if ((pierwsza.getDenumerator() * druga.getNumerator()) == 0)
+        throw divisionByZero();
+
+    int newNumer = pierwsza.getNumerator() * druga.getDenumerator();
+    int newDenum = pierwsza.getDenumerator() * druga.getNumerator();
+
+    return liczbaWymierna(newNumer, newDenum);
+}
+
+string wyjatekWym::mesgErr() {
+    return "Wyjatek liczby wymiernej";
+}
+
+string divisionByZero::mesgErr() {
+    return "Nie mozna dzielic przez 0!";
+}
+
+string rangeError::mesgErr() {
+    return "Przekroczony zakres";
+}
+
+int nwd(int a, int b) {
+    while (b != 0) {
+        int r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;
+}
+
+
+int nww(int a, int b) {
+    long long int mult = (static_cast<long long int>(a)) * (static_cast<long long int>(b));
+    mult /= nwd(a, b);
+
+    if (mult > INT32_MAX)
+        throw rangeError();
+    else
+        return static_cast<int>(mult);
+}
+
+ostream& operator<<(ostream &wy, const liczbaWymierna &wzor) {
+    double z = static_cast<double> (wzor.getNumerator())/(wzor.getDenumerator());
+    wy << z <<endl;
+    return wy;
 }

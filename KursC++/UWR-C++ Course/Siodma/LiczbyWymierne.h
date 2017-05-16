@@ -1,49 +1,45 @@
-#ifndef SIODMA_LICZBYRZECZYWISTE_H
-#define SIODMA_LICZBYRZECZYWISTE_H
-
-#ifndef RATIONAL_NUM
-#define RATIONAL_NUM
-
 #include <iostream>
-using namespace std;
 
-class LiczbyWymierne {
 
+class liczbaWymierna
+{
 private:
-    int licznik;
-    int mianownik;
-    void uproszczenieLiczbyRzeczywistej();
+    int numerator;
+    int denumerator;
+
 public:
-    LiczbyWymierne();
-    LiczbyWymierne(double x);
-    LiczbyWymierne(int licznik, int mianownik = 1);
-    friend LiczbyWymierne operator+(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend LiczbyWymierne operator-(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend LiczbyWymierne operator-(const LiczbyWymierne& obj);
-    friend LiczbyWymierne operator*(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend LiczbyWymierne operator/(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend LiczbyWymierne operator!(const LiczbyWymierne& obj);
-    friend bool operator==(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend bool operator!=(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend bool operator<(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend bool operator>(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend bool operator<=(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend bool operator>=(const LiczbyWymierne& left, const LiczbyWymierne& right);
-    friend ostream& operator<<(ostream& out, const LiczbyWymierne& obj);
+    liczbaWymierna(int licz = 0, int mian = 1);
+    liczbaWymierna(int licz);
+    liczbaWymierna(const liczbaWymierna &obj);
+    liczbaWymierna& operator=(const liczbaWymierna &obj);
+    int getNumerator() const;
+    int getDenumerator() const;
+    explicit operator int();
+    explicit operator double();
 
-
-    LiczbyWymierne& operator=(const LiczbyWymierne& obj);
-    LiczbyWymierne& operator+=(const LiczbyWymierne& obj);
-    LiczbyWymierne& operator-=(const LiczbyWymierne& obj);
-    LiczbyWymierne& operator*=(const LiczbyWymierne& obj);
-    LiczbyWymierne& operator/=(const LiczbyWymierne& obj);
-
-
-    void setLicznik(int tempLicznik);
-    int getLicznik() const;
-    void setMianownik(int tempMianownik);
-    int getMianownik() const;
+    friend liczbaWymierna operator-(const liczbaWymierna &wzor);
+    friend liczbaWymierna operator!(const liczbaWymierna &wzor);
+    friend std::ostream& operator<<(std::ostream &output, const liczbaWymierna &wzor);
+    friend const liczbaWymierna operator+(const liczbaWymierna &first, const liczbaWymierna &second);
+    friend const liczbaWymierna operator-(const liczbaWymierna &first, const liczbaWymierna &second);
+    friend const liczbaWymierna operator*(const liczbaWymierna &first, const liczbaWymierna &second);
+    friend const liczbaWymierna operator/(const liczbaWymierna &first, const liczbaWymierna &second);
 };
-#endif
 
-#endif //SIODMA_LICZBYRZECZYWISTE_H
+int nwd(int a, int b);
+int nww(int a, int b);
+
+class wyjatekWym : public std::exception {
+public:
+    std::string mesgErr();
+};
+
+class divisionByZero : public wyjatekWym {
+public:
+    std::string mesgErr();
+};
+
+class rangeError : public wyjatekWym {
+public:
+    std::string mesgErr();
+};
