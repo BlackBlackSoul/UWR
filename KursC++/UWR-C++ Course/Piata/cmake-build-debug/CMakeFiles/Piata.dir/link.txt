@@ -1,1 +1,0 @@
-/usr/bin/c++   -g   CMakeFiles/Piata.dir/main.cpp.o CMakeFiles/Piata.dir/DoubleLinkedListsource.cpp.o  -o Piata 
