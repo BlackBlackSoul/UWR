@@ -1,4 +1,4 @@
-package com.hagibidaba;
+package com.psd;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
