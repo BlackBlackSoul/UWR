@@ -1,0 +1,13 @@
+PART A:
+    - I have downloaded zookeeper server. To run it I needed to specify config file, which was provided in conf directory
+    but I need to change the name from sample_zoo.cfg to zoo.cfg.
+    - Then I was able to run server in PowerShell: .\bin\zkServer.cmd
+    - In another PowerShell window I connected to server: .\bin\zkCli.cmd -server 127.0.0.1:2181 (PORT is specified in zoo.cfg file)
+    - I have created ephermal node: create -e /Assignment "no data"
+    - Result of 'ls /': [Assignment, zookeeper]
+    - In another PowerShell windows I connected to server using the same command as above and watch for changes in /Assignment node: get /Assignment 1
+    - Result of 'ls /': [Assignment, zookeeper]
+    - When I want to Add child to that /Assignment node it is impossible, because: "Ephemerals cannot have children: /Assignment/Children"
+      And from documentation: "These znodes exists as long as the session that created the znode is active. When the session ends the znode is deleted. Because of this behavior ephemeral znodes are not allowed to have children."
+    - I used set command to change data in Node and result in watcher: WatchedEvent state:SyncConnected type:NodeDataChanged path:/Assignment
+    - I deleted node /Assigment and output of watcher: "WatchedEvent state:SyncConnected type:NodeDeleted path:/Assignment"
