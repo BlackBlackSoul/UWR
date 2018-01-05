@@ -1,0 +1,18 @@
+OPIS:
+
+    - Atak ma na celu skłonić użytkownika zalogowanego do serwisu internetowego do tego,
+    aby uruchomił on odnośnik, którego otwarcie wykona w owym serwisie akcję, do której 
+    atakujący nie miałby w przeciwnym razie dostępu. Na przykład, użytkowniczka Małgosia,
+    na stałe zalogowana do forum internetowego, może w pewnym momencie otworzyć spreparowany
+    przez Jasia link, który zmieni jej dane kontaktowe albo usunie wątek dyskusji.
+    Jako link może również posłużyć obrazek, którego adres został odpowiednio przygotowany,
+    a konsekwencje wykonanej akcji mogą być znacznie poważniejsze.
+
+PRZECIWDZIAŁANIE:
+
+    - Istnieje cały szereg metod, które utrudniają przeprowadzenie skutecznego ataku CSRF:
+        - Hasła jednorazowe uniemożliwiają osobie niepowołanej spreparowanie poprawnego żądania do serwera. Wymóg podania hasła udostępnionego wyłącznie dysponentowi konta na papierowej liście lub tokenie bądź też przesłanego SMSem na numer telefonu komórkowego praktycznie wyklucza powodzenie ataku CSRF.
+        - Im większe konsekwencje dla użytkownika niesie korzystanie ze strony, tym krótszy powinien być okres ważności zalogowania i dopuszczalny czas bezczynności.
+        - Żądania mające skutki uboczne mogą wymagać potwierdzenia, połączonego ew. z ponowną autoryzacją.
+        - Do każdego formularza można dodawać ukryte pole, zawierające liczbę pseudolosową, która musi zostać przekazana wraz z żądaniem wykonania akcji. Ignorowanie żądań, którym brakuje ukrytej wartości bądź gdy nie pokrywa się ona z liczbą zachowaną po stronie serwera, utrudnia spreparowanie ataku.
+        - Zamiast liczby pseudolosowej przesłać można zawartość ciasteczka służącego do uwierzytelnienia i porównać je z wartością przesłaną w nagłówku żądania HTTP oraz tą zapisaną po stronie serwera. Metoda ta opiera swoje bezpieczeństwo na zasadzie same origin policy, która gwarantuje, że wartość ciasteczka dostępna jest jedynie dla skryptów pochodzących z oryginalnej strony. Zwrócić należy jednak uwagę na to, że odpowiednio spreparowany skrypt może zostać umieszczony w serwisie przy pomocy ataku XSS.
