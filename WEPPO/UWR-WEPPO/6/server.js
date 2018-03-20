@@ -65,6 +65,16 @@ app.get('/clear', (req, res) => {
     res.redirect('/');
 })
 
+app.get('/sessions', (req, res, next) => {
+    var sess = req.session;
+
+    if (sess.name) {
+        res.write('Hi ' + sess.name + '\n');
+    } else {
+        sess.name = req.query.name;
+    }
+    next();
+})
 app.get('/sessions', (req, res) => {
     var sess = req.session
 

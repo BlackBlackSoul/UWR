@@ -1,0 +1,9 @@
+{   
+    "Name" : "Adam",
+    "Surname" : "Smith",
+    "Age" : 12,
+    "Favourites" : {
+        "Color" : "Blue",
+        "Football player" : "Beckham"
+    }
+}
